@@ -1,65 +1,96 @@
 import * as React from 'react'
 import { Box, ChakraProvider, List, extendBaseTheme } from '@chakra-ui/react'
-import { Container, Row, Col } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import Card from 'react-bootstrap/Card';
+//import Music from './Music.js';
+import News from './News.js';
+import Music from './Music.js';
+import { useState } from 'react';
 
 
 function WeatherViewTable({ weatherData }) {
 
     return (
-        <Container fluid className='mainView'>
-            <HeaderView weatherData={weatherData}/>
-            <ListView />
+        <Container lg="12" fluid>
+            <HeaderView weatherData={weatherData} />
+            <ListView  weatherDataList={weatherData} />
         </Container>
     );
 
 }
 
-function HeaderView({ Data }) {
-
+function HeaderView({ weatherData }) {
+   const [data, setData] = useState(weatherData);
+   console.log(data);
     return (
-        <Row className='headerView'>
-            <Col><div className='currentWeatherForcast'></div></Col>
-            <Col><div className='currentDegree'></div></Col>
-        </Row>
+        <Container fluid lg="12">
+            <Row className='headerView'>
+               <Col lg="6" className='currentWeatherForcast'>
+                     <Card className='card'>
+                        <div>
+                           <h2>{data[0].current.weather[0].main}</h2>
+                           <p>
+                              <br />
+                              Most of the time we will have {data[0].current.weather[0].description}, with a wind speed of {data[0].current.wind_speed} knots
+                           </p>
+                        </div>
+                     </Card>
+               </Col>
+               <Col  lg="6" className='currentDegree'>
+                  <Card className='cardDegreeView'>
+                     <p>12 degree</p>
+                  </Card>
+               </Col>
+            </Row>
+        </Container>
     );
 
 }
 
-function ListView() {
+function ListView({ weatherDataList }) {
 
     return (
-        <Row className='listView'>
-            <ListViewRow />
-        </Row>
+        <Container fluid  lg="12">
+            <Row className='listView'>
+               <ListViewRow weatherDataListRow={weatherDataList}/>
+            </Row>
+        </Container>
     );
 }
 
-function ListViewRow() {
+function ListViewRow({ rowData }) {
     return (
-        <Row className='listViewRow'>
-        </Row>
+        <Col lg="12" className='card'>
+            <div className='cardRow'>
+               <p>
+                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
+                  in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+               </p>
+            </div>
+        </Col>
     );
-}
-
-function MusicView() {
-
-}
-
-function NewsView() {
-
-}
-
-function NewsViewRow() {
-
 }
 
 export default function weatherApp() {
 
     return (
-        <ChakraProvider>
-                <WeatherViewTable weatherData={weatherData}/>
-        </ChakraProvider>
-      )
+         <Container fluid  className='mainView'>
+            <Row>
+               <Col>      
+                  <WeatherViewTable weatherData={weatherData}/>
+               </Col>
+               <Col>
+                  <Music />
+                  <News />
+               </Col>
+            </Row>
+         </Container>
+      );
       
 }
 
