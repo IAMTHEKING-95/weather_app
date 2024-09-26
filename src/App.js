@@ -24,7 +24,6 @@ function WeatherViewTable({ weatherData }) {
 
 function HeaderView({ weatherData }) {
    const [data, setData] = useState(weatherData);
-   console.log(data);
     return (
         <Container fluid lg="12">
             <Row className='headerView'>
@@ -34,7 +33,7 @@ function HeaderView({ weatherData }) {
                            <h2>{data[0].current.weather[0].main}</h2>
                            <p>
                               <br />
-                              Most of the time we will have {data[0].current.weather[0].description}, with a wind speed of {data[0].current.wind_speed} knots
+                              Most of the time we will have {data[0].current.weather[0].description}, with a wind speed of {data[0].current.wind_speed} knots.
                            </p>
                         </div>
                      </Card>
@@ -51,28 +50,31 @@ function HeaderView({ weatherData }) {
 }
 
 function ListView({ weatherDataList }) {
+   const rows = [];
+   console.log(weatherDataList[0].daily)
+
+   weatherDataList[0].daily.forEach((weather) => {
+      rows.push( <ListViewRow weather={weather} key={weather.id} /> );
+   });
 
     return (
         <Container fluid  lg="12">
             <Row className='listView'>
-               <ListViewRow weatherDataListRow={weatherDataList}/>
+               <Col lg="12" className='card'>
+                  {rows}
+               </Col>
             </Row>
         </Container>
     );
 }
 
-function ListViewRow({ rowData }) {
+function ListViewRow({ weather }) {
     return (
-        <Col lg="12" className='card'>
-            <div className='cardRow'>
-               <p>
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit 
-                  in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
-                  Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-               </p>
-            </div>
-        </Col>
+      <div className='cardRow'>
+         <p>
+            {weather.rain}
+         </p>
+      </div>
     );
 }
 
@@ -162,6 +164,7 @@ const weatherData = [
        ],
        "daily":[
           {
+            "id":1,
              "dt":1684951200,
              "sunrise":1684926645,
              "sunset":1684977332,
@@ -201,7 +204,91 @@ const weatherData = [
              "pop":0.47,
              "rain":0.15,
              "uvi":9.23
-          }
+          },
+          {
+            "id":2,
+            "dt":1684951200,
+            "sunrise":1684926645,
+            "sunset":1684977332,
+            "moonrise":1684941060,
+            "moonset":1684905480,
+            "moon_phase":0.16,
+            "summary":"Expect a day of partly cloudy with rain",
+            "temp":{
+               "day":299.03,
+               "min":290.69,
+               "max":300.35,
+               "night":291.45,
+               "eve":297.51,
+               "morn":292.55
+            },
+            "feels_like":{
+               "day":299.21,
+               "night":291.37,
+               "eve":297.86,
+               "morn":292.87
+            },
+            "pressure":1016,
+            "humidity":59,
+            "dew_point":290.48,
+            "wind_speed":3.98,
+            "wind_deg":76,
+            "wind_gust":8.92,
+            "weather":[
+               {
+                  "id":500,
+                  "main":"Rain",
+                  "description":"light rain",
+                  "icon":"10d"
+               }
+            ],
+            "clouds":92,
+            "pop":0.47,
+            "rain":0.15,
+            "uvi":9.23
+         },
+         {
+            "id":3,
+            "dt":1684951200,
+            "sunrise":1684926645,
+            "sunset":1684977332,
+            "moonrise":1684941060,
+            "moonset":1684905480,
+            "moon_phase":0.16,
+            "summary":"Expect a day of partly cloudy with rain",
+            "temp":{
+               "day":299.03,
+               "min":290.69,
+               "max":300.35,
+               "night":291.45,
+               "eve":297.51,
+               "morn":292.55
+            },
+            "feels_like":{
+               "day":299.21,
+               "night":291.37,
+               "eve":297.86,
+               "morn":292.87
+            },
+            "pressure":1016,
+            "humidity":59,
+            "dew_point":290.48,
+            "wind_speed":3.98,
+            "wind_deg":76,
+            "wind_gust":8.92,
+            "weather":[
+               {
+                  "id":500,
+                  "main":"Rain",
+                  "description":"light rain",
+                  "icon":"10d"
+               }
+            ],
+            "clouds":92,
+            "pop":0.47,
+            "rain":0.15,
+            "uvi":9.23
+         }
        ],
         "alerts": [
         {
