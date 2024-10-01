@@ -12,7 +12,7 @@ import { useState } from 'react';
 
 
 function WeatherViewTable({ weatherData }) {
-
+const blaba = 0;
     return (
         <Container lg="12" fluid>
             <HeaderView weatherData={weatherData} />
