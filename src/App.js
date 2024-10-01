@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
-//import Music from './Music.js';
+//import Music from './Music.js'; thomas
 import News from './News.js';
 import Music from './Music.js';
 import { useState } from 'react';
